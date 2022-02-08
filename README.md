@@ -2,10 +2,14 @@
 Node client to updates DNS entry in Cloudflare
 
 ## Install
+```
 get clone https://github.com/jhfoo/cloudflare-ddns.git
+```
 
 ## Usage
+```
 npm start <host.domain.name> <cloudflare api token>
+```
 
 ## API Token Config
 Create a token with the following permission:
