@@ -3,7 +3,7 @@ Node client to updates DNS entry in Cloudflare
 
 ## Install
 ```
-get clone https://github.com/jhfoo/cloudflare-ddns.git
+git clone https://github.com/jhfoo/cloudflare-ddns.git
 ```
 
 ## Usage
