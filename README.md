@@ -51,5 +51,5 @@ Alternatively the API token can be read from the environment variable CLOUDFLARE
 is passed in the CLI it supercedes the environment variable.
 
 Server mode
-TBC
+- TBC
 
