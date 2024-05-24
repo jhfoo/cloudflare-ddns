@@ -19,6 +19,16 @@ class CloudflareClient:
 
     return None
 
+  def createDnsRecord(self, ZoneId, fqdn, IpAddr):
+    resp = self.apiPost(f"/zones/{ZoneId}/dns_records", {
+      'type': 'A',
+      'name': fqdn,
+      'content': IpAddr,
+      'ttl': 60,
+      'proxied': False,
+    })
+    return resp.json()
+
   def updateDnsRecord(self, ZoneId, RecordId, fqdn, IpAddr):
     resp = self.apiPut(f"/zones/{ZoneId}/dns_records/{RecordId}", {
       'type': 'A',
@@ -27,7 +37,7 @@ class CloudflareClient:
       'ttl': 60,
       'proxied': False,
     })
-    return resp
+    return resp.json()
 
   def getDnsRecord(self, ZoneId, fqdn):
     subpath = f'/zones/{ZoneId}/dns_records'
@@ -38,7 +48,7 @@ class CloudflareClient:
         if rec['name'] == fqdn:
           return rec
 
-      raise Exception(f'Missing DNS record for {fqdn}')
+      return None
     else:
       raise Exception(f'Unexpected response from {subpath}')
 
@@ -51,8 +61,14 @@ class CloudflareClient:
     # else
     raise Exception('Unexpected response from /zones')
 
+  def apiPost(self, url, data):
+    resp = requests.post(API_BASEURL + url, json = data, headers = {
+      'Authorization': f"Bearer {self.ApiToken}"
+    })
+    return resp
+
   def apiPut(self, url, data):
-    print (f"[debug] GET {API_BASEURL + url} {self.ApiToken}")
+    # print (f"[debug] GET {API_BASEURL + url} {self.ApiToken}")
     resp = requests.put(API_BASEURL + url, json = data, headers = {
       'Authorization': f"Bearer {self.ApiToken}"
     })

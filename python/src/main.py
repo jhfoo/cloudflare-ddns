@@ -43,7 +43,10 @@ def doClient(args):
       print (f"{'Record Id'.ljust(FIELD_LJUST)}: {RecordId}")
       resp = client.updateDnsRecord(ZoneId, RecordId, args.fqdn, PublicIp)
       print (f"{'Update record'.ljust(FIELD_LJUST)}: {'OK' if resp['success'] else 'ERROR'}")
-      print (f"[debug] {resp.text}")
+    else:
+      resp = client.createDnsRecord(ZoneId, args.fqdn, PublicIp)
+      print (f"{'Create record'.ljust(FIELD_LJUST)}: {'OK' if resp['success'] else 'ERROR'}")
+      # print (f"[debug] {resp.text}")
     # doApiCall(f"{API_BASEURL}/zones/${args.fqdn}/dns_records")
 
   except Exception as err:
