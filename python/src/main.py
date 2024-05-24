@@ -42,7 +42,7 @@ def doClient(args):
       RecordId = DnsRecord['id']
       print (f"{'Record Id'.ljust(FIELD_LJUST)}: {RecordId}")
       resp = client.updateDnsRecord(ZoneId, RecordId, args.fqdn, PublicIp)
-      print (f"{'Update record'.ljust(FIELD_LJUST)}: OK")
+      print (f"{'Update record'.ljust(FIELD_LJUST)}: {'OK' if resp['success'] else 'ERROR'}")
       print (f"[debug] {resp.text}")
     # doApiCall(f"{API_BASEURL}/zones/${args.fqdn}/dns_records")
 
