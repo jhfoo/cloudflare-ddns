@@ -33,3 +33,12 @@ git clone https://github.com/jhfoo/cloudflare-ddns.git
 cd cloudflare-ddns/python
 ./bin/setup
 ```
+
+### Usage
+```
+cd cloudflare-ddns/python
+./bin/cloudflare-ddns client <hostname> <api token>
+```
+
+Alternatively the API token can be read from the environment variable CLOUDFLARE_TOKEN. If token
+is passed in the CLI it supercedes the environment variable.
