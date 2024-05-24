@@ -35,6 +35,13 @@ cd cloudflare-ddns/python
 ```
 
 ### Usage
+Help
+```
+cd cloudflare-ddns/python
+./bin/cloudflare-ddns -h
+```
+
+Client mode
 ```
 cd cloudflare-ddns/python
 ./bin/cloudflare-ddns client <hostname> <api token>
