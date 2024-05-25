@@ -1,8 +1,22 @@
+case $(uname -v) in
+  *FreeBSD*)
+    echo "- Running FreeBSD customizations"
+    PYTHON=python3.9
+    VENV_OPTION="--system-site-packages"
+    sudo pkg install -y py39-ujson
+    ;;
+  *)
+    echo "- Running Linux (Debian) customizations"
+    PYTHON=python3
+    VENV_OPTION=""
+    ;;
+esac
+
 echo "- Removing existing venv/"
 rm -rf venv
 
 echo "- Installing venv/"
-python3 -m venv venv
+$PYTHON -m venv venv $VENV_OPTION
 
 echo "- Installing Python dependencies"
 ./venv/bin/pip3 install -r conf/requirements.txt

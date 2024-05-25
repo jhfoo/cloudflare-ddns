@@ -71,7 +71,7 @@ if __name__ == "__main__":
   ClientParser.add_argument('ApiToken', nargs='?')
 
   ServerParser = subparser.add_parser('server')
-  ServerParser.add_argument('port', nargs='?', default = 5000)
+  ServerParser.add_argument('port', type=int, nargs='?', default = 5000)
   ServerParser.add_argument('-d','--dev', action = 'store_true')
   ServerParser.set_defaults(func = doServer)
 
