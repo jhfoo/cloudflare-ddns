@@ -35,13 +35,13 @@ cd cloudflare-ddns/python
 ```
 
 ### Usage
-Help
+#### Help
 ```
 cd cloudflare-ddns/python
 ./bin/cloudflare-ddns -h
 ```
 
-Client mode
+#### Client mode
 ```
 cd cloudflare-ddns/python
 ./bin/cloudflare-ddns client <hostname> <api token>
@@ -50,6 +50,16 @@ cd cloudflare-ddns/python
 Alternatively the API token can be read from the environment variable CLOUDFLARE_TOKEN. If token
 is passed in the CLI it supercedes the environment variable.
 
-Server mode
-- TBC
+#### Server mode
+```
+cd cloudflare-ddns/python
+./bin/cloudflare-ddns server [<port>] [--dev|-d]
+```
+--dev runs server in development mode which means the server does not exit upon shutdown. 
+
+The following paths are valid:
+```
+/shutdown # stops the service
+/cdn-cgi/trace # mimicks the same path as Cloudflare
+```
 
