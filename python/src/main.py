@@ -5,7 +5,7 @@ import re
 import time
 
 # community
-import requests
+import uvicorn
 
 # custom
 from CloudflareClient import CloudflareClient
@@ -56,22 +56,27 @@ def doClient(args):
   print (f"{'Time taken'.ljust(FIELD_LJUST)}: {TimeTaken}ms")
 
 def doServer(args):
-  print ('I am the server')
+  print (f"Listening on port {args.port}")
 
-parser = argparse.ArgumentParser()
-subparser = parser.add_subparsers(dest='cmd', help = 'Client or server mode')
+  isReload = args.dev
+  uvicorn.run('Server:app', host = '0.0.0.0', port = args.port, log_level='debug', reload=isReload)
 
-ClientParser = subparser.add_parser('client')
-ClientParser.set_defaults(func = doClient)
-ClientParser.add_argument('fqdn')
-ClientParser.add_argument('ApiToken', nargs='?')
+if __name__ == "__main__":
+  parser = argparse.ArgumentParser()
+  subparser = parser.add_subparsers(dest='cmd', help = 'Client or server mode')
 
-ServerParser = subparser.add_parser('server')
-ServerParser.add_argument('host')
-ServerParser.set_defaults(func = doServer)
+  ClientParser = subparser.add_parser('client')
+  ClientParser.set_defaults(func = doClient)
+  ClientParser.add_argument('fqdn')
+  ClientParser.add_argument('ApiToken', nargs='?')
 
-args = parser.parse_args()
-if args.cmd == None:
-  print (parser.print_help())
-else:
-  args.func(args)
+  ServerParser = subparser.add_parser('server')
+  ServerParser.add_argument('port', nargs='?', default = 5000)
+  ServerParser.add_argument('-d','--dev', action = 'store_true')
+  ServerParser.set_defaults(func = doServer)
+
+  args = parser.parse_args()
+  if args.cmd == None:
+    print (parser.print_help())
+  else:
+    args.func(args)
