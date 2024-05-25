@@ -9,12 +9,19 @@ from fastapi.responses import PlainTextResponse
 
 app = FastAPI()
 
-@app.get('/cdn-cgi/trace', response_class = PlainTextResponse)
-def onTest(req:Request):
+def getClientInfo(req:Request):
   return f"""ip={req.client.host}
 visit_scheme={req.url.scheme}
 uag={req.headers['User-Agent']}
 """
+
+@app.get('/', response_class = PlainTextResponse)
+def onTest(req:Request):
+  return getClientInfo(req)  
+
+@app.get('/cdn-cgi/trace', response_class = PlainTextResponse)
+def onTest(req:Request):
+  return getClientInfo(req)  
 
 @app.get('/shutdown')
 def onShutdown():

@@ -61,5 +61,6 @@ The following paths are valid:
 ```
 /shutdown      # stops the service
 /cdn-cgi/trace # mimicks the same path as Cloudflare
+/              # same as above: for lazy people
 ```
 
