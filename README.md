@@ -59,7 +59,7 @@ cd cloudflare-ddns/python
 
 The following paths are valid:
 ```
-/shutdown # stops the service
+/shutdown      # stops the service
 /cdn-cgi/trace # mimicks the same path as Cloudflare
 ```
 
